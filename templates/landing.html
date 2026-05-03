@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% block title %}From Bilal{% endblock %}
+{% block content %}
+
+<div class="landing-hero">
+  <div class="landing-eyebrow">👋 hey.</div>
+  <h1 class="landing-title">
+    i made this <span class="landing-title-grad">for you.</span>
+  </h1>
+  <p class="landing-sub">
+    it's a tracker for learning software + AI properly — from "what's a computer" all the way to building your own LLM.<br>
+    you read, you build, you write a few lines about what you learned. i actually review it.
+  </p>
+  <div class="landing-cta">
+    <a href="{{ url_for('signup') }}" class="btn btn-big">let's start →</a>
+    <a href="{{ url_for('login') }}" class="btn btn-ghost btn-big">already in</a>
+  </div>
+</div>
+
+<section class="quote-banner">
+  <p class="big-quote">"i will find a way,<br>or i will make one."</p>
+</section>
+
+<section class="landing-section">
+  <h2 class="landing-h2">what you're signing up for</h2>
+  <p class="landing-lead muted">
+    {{ total_phases }} phases. {{ total_lessons }} lessons. roughly {{ total_hours }} hours of focused work.
+    if you do this seriously it's a couple of years. if you do it half-heartedly it's a couple of years wasted —
+    same time either way, your call.
+  </p>
+  <div class="phase-tile-grid">
+    {% for phase in phases %}
+      <div class="phase-tile" style="--phase-color: {{ phase.color or '#06b6d4' }};">
+        <div class="phase-tile-icon">{{ phase.icon or '📘' }}</div>
+        <div class="phase-tile-title">{{ phase.title.split('—')[1] if '—' in phase.title else phase.title }}</div>
+        <div class="phase-tile-meta">{{ phase.duration_weeks }} wks</div>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="landing-section">
+  <h2 class="landing-h2">the rules</h2>
+  <ul class="rules">
+    <li><span class="rule-num">1</span> read the lesson. links are real, courses are vetted, no fluff.</li>
+    <li><span class="rule-num">2</span> do the project. every lesson has one. no project, no progress.</li>
+    <li><span class="rule-num">3</span> write a reflection. like three sentences. <strong>i read every single one.</strong></li>
+    <li><span class="rule-num">4</span> if it's lazy or copy-pasted, i reject it. you redo it. fair.</li>
+    <li><span class="rule-num">5</span> approved lessons earn XP. XP gets you ranks. ranks unlock bragging rights.</li>
+  </ul>
+</section>
+
+{% if ranks %}
+<section class="landing-section">
+  <h2 class="landing-h2">ranks</h2>
+  <p class="landing-lead muted">where you start, where you're going.</p>
+  <div class="rank-row">
+    {% for r in ranks %}
+      <div class="rank-card">
+        <div class="rank-emoji">{{ r.emoji }}</div>
+        <div class="rank-name">{{ r.name }}</div>
+        <div class="rank-pct">{{ r.min_pct }}%+</div>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+<section class="landing-section landing-bottom-note">
+  <p class="landing-personal">
+    built for <strong>ishaq</strong> and <strong>hammad</strong>. if you stumbled onto this some other way, you're welcome here too. the path works for anyone willing to actually do the work.
+  </p>
+</section>
+
+{% endblock %}

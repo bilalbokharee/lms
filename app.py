@@ -323,7 +323,34 @@ def compute_phase_stats(approved_set):
 def index():
     if current_user():
         return redirect(url_for("dashboard"))
-    return redirect(url_for("login"))
+    # Build totals for the landing page
+    total_lessons = sum(
+        len(m.get("lessons", []))
+        for p in CURRICULUM["phases"]
+        for m in p.get("modules", [])
+    )
+    total_hours = sum(
+        l.get("hours", 0) or 0
+        for p in CURRICULUM["phases"]
+        for m in p.get("modules", [])
+        for l in m.get("lessons", [])
+    )
+    total_courses = sum(
+        len(l.get("courses", []))
+        for p in CURRICULUM["phases"]
+        for m in p.get("modules", [])
+        for l in m.get("lessons", [])
+    )
+    return render_template(
+        "landing.html",
+        phases=CURRICULUM["phases"],
+        domains=CURRICULUM["future_proof_domains"],
+        ranks=CURRICULUM.get("ranks", []),
+        total_phases=len(CURRICULUM["phases"]),
+        total_lessons=total_lessons,
+        total_hours=total_hours,
+        total_courses=total_courses,
+    )
 
 
 @app.route("/signup", methods=["GET", "POST"])

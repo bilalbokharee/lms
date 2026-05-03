@@ -38,7 +38,7 @@
       <div class="course-card">
         <div class="platform">{{ c.platform }}{% if c.free_audit %} · free audit{% endif %}{% if c.highly_recommended %} · ★ top pick{% endif %}</div>
         <div class="title">{{ c.title }}</div>
-        <span style="font-size:13px;color:var(--violet-2);">View course →</span>
+        <span style="font-size:13px;color:var(--primary-2);">View course →</span>
       </div>
     </a>
   {% endfor %}
@@ -152,7 +152,7 @@
 (function() {
   const flashes = document.querySelectorAll('.flash.success');
   if (!flashes.length) return;
-  const colors = ['#8b5cf6', '#ec4899', '#06b6d4', '#84cc16', '#f59e0b'];
+  const colors = ['#06b6d4', '#22d3ee', '#0ea5e9', '#38bdf8', '#84cc16', '#a3e635'];
   for (let i = 0; i < 60; i++) {
     const piece = document.createElement('div');
     piece.className = 'confetti-piece';

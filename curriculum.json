@@ -93,7 +93,7 @@
     {
       "id": "phase-1",
       "title": "Phase 1 — Your First Lines of Code (Python)",
-      "color": "#8b5cf6",
+      "color": "#0ea5e9",
       "icon": "🐍",
       "duration_weeks": "5–7",
       "objective": "Write your first program. Then your tenth. Python is the friendliest language and also the language of AI — perfect choice.",
@@ -135,7 +135,7 @@
     {
       "id": "phase-2",
       "title": "Phase 2 — Real Programming",
-      "color": "#10b981",
+      "color": "#14b8a6",
       "icon": "📦",
       "duration_weeks": "6–8",
       "objective": "Step up from toy programs to real ones. Lists, files, errors, classes. The skills you actually use every day.",
@@ -183,7 +183,7 @@
     {
       "id": "phase-3",
       "title": "Phase 3 — The Engineer's Toolkit",
-      "color": "#f59e0b",
+      "color": "#38bdf8",
       "icon": "🧰",
       "duration_weeks": "4–6",
       "objective": "Every professional engineer uses these tools daily: terminal, Git, GitHub, a real IDE, and AI helpers. None of them are optional.",
@@ -254,7 +254,7 @@
     {
       "id": "phase-4",
       "title": "Phase 4 — Databases: Where Data Lives",
-      "color": "#ec4899",
+      "color": "#2563eb",
       "icon": "🗄️",
       "duration_weeks": "5–7",
       "objective": "Almost every app has a database. Understand SQL, schemas, and how to make data persist beyond your program.",
@@ -351,7 +351,7 @@
     {
       "id": "phase-6",
       "title": "Phase 6 — Modern Frontend with React",
-      "color": "#06b6d4",
+      "color": "#0891b2",
       "icon": "⚛️",
       "duration_weeks": "5–7",
       "objective": "React is the dominant UI framework. The most-asked-for skill on every frontend job listing.",
@@ -382,7 +382,7 @@
     {
       "id": "phase-7",
       "title": "Phase 7 — Backend & Full-Stack Apps",
-      "color": "#10b981",
+      "color": "#65a30d",
       "icon": "🔌",
       "duration_weeks": "8–10",
       "objective": "Build the server side. APIs, authentication, full-stack apps where everything you've learned comes together.",
@@ -429,7 +429,7 @@
     {
       "id": "phase-8",
       "title": "Phase 8 — Shipping Software (Cloud, DevOps, Application Delivery)",
-      "color": "#f97316",
+      "color": "#84cc16",
       "icon": "🚀",
       "duration_weeks": "5–7",
       "objective": "Code on your laptop is worthless. Code running for users is everything. This phase covers the journey from 'works on my machine' to a real public app.",
@@ -480,7 +480,7 @@
     {
       "id": "phase-9",
       "title": "Phase 9 — CS Fundamentals & Interview Prep",
-      "color": "#a855f7",
+      "color": "#0d9488",
       "icon": "🎓",
       "duration_weeks": "8–10",
       "objective": "The skills that get you past the technical interview at any serious company. Skip-able if your goal is freelance/indie. Critical if your goal is FAANG / top startup.",
@@ -519,7 +519,7 @@
     {
       "id": "phase-10",
       "title": "Phase 10 — Math for Machine Learning",
-      "color": "#eab308",
+      "color": "#a3e635",
       "icon": "📐",
       "duration_weeks": "6–8",
       "objective": "You don't need to be a mathematician. But to UNDERSTAND ML — not just call .fit() — you need linear algebra, calculus, and probability. Skip this and you'll be a tutorial coder forever.",
@@ -556,7 +556,7 @@
     {
       "id": "phase-11",
       "title": "Phase 11 — Machine Learning Foundations",
-      "color": "#ef4444",
+      "color": "#0e7490",
       "icon": "🤖",
       "duration_weeks": "10–12",
       "objective": "Classical ML — the algorithms behind 80% of real-world ML systems still in production. Learn this BEFORE jumping to deep learning.",
@@ -593,7 +593,7 @@
     {
       "id": "phase-12",
       "title": "Phase 12 — Deep Learning, LLMs & Generative AI",
-      "color": "#8b5cf6",
+      "color": "#22d3ee",
       "icon": "🧠",
       "duration_weeks": "12–16",
       "objective": "The architectures behind ChatGPT, Claude, Stable Diffusion, and every AI product. The most leveraged skillset on Earth in 2026.",
@@ -647,7 +647,7 @@
     {
       "id": "phase-13",
       "title": "Phase 13 — Career Launch & Side Income",
-      "color": "#22c55e",
+      "color": "#84cc16",
       "icon": "💰",
       "duration_weeks": "Ongoing",
       "objective": "Turn skills into income, reputation, and a real career.",
