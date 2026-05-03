@@ -1,0 +1,36 @@
+# Render deployment blueprint
+# IMPORTANT: Render's free tier does NOT provide persistent disk.
+# That means your SQLite database will be WIPED every time the service redeploys or restarts.
+# For a real deployment with users, use the $7/mo Starter plan with the persistent disk below.
+#
+# Push this repo to GitHub, then on Render: New → Blueprint → connect repo → it'll read this file.
+#
+# After deploy, add env secrets in the Render dashboard:
+#   SECRET_KEY = (random 64-char hex)
+#   SUPERUSER_USERNAME = bilal
+#   SUPERUSER_PASSWORD = (strong password)
+
+services:
+  - type: web
+    name: frombilal
+    runtime: docker
+    plan: starter           # 'free' tier loses SQLite on restart — see note above
+    region: frankfurt       # frankfurt, oregon, ohio, singapore — pick what's near you
+    dockerfilePath: ./Dockerfile
+    autoDeploy: true
+    envVars:
+      - key: PORT
+        value: 8080
+      - key: DB_PATH
+        value: /data/lms.db
+      - key: SECRET_KEY
+        sync: false           # set in dashboard
+      - key: SUPERUSER_USERNAME
+        sync: false
+      - key: SUPERUSER_PASSWORD
+        sync: false
+    disk:
+      name: lms-data
+      mountPath: /data
+      sizeGB: 1
+    healthCheckPath: /api/health

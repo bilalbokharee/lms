@@ -1,0 +1,37 @@
+# Fly.io deployment config for "From Bilal" LMS
+# Deploy: fly launch --no-deploy && fly volumes create lms_data --size 1 --region <region> && fly deploy
+# Set secrets first:
+#   fly secrets set SECRET_KEY="$(python -c 'import secrets; print(secrets.token_hex(32))')"
+#   fly secrets set SUPERUSER_USERNAME=bilal SUPERUSER_PASSWORD='<your-strong-password>'
+#
+# Free tier: 3 shared-cpu-1x VMs + 3GB volume storage. Plenty for a small group.
+
+app = "frombilal"           # rename to anything available — final URL is https://<app>.fly.dev
+primary_region = "sin"      # Singapore — lowest latency for South / Southeast Asia
+                            # See https://fly.io/docs/reference/regions/ if you want to change
+
+[build]
+  dockerfile = "Dockerfile"
+
+[env]
+  PORT = "8080"
+  DB_PATH = "/data/lms.db"
+
+[[mounts]]
+  source = "lms_data"
+  destination = "/data"
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = "stop"     # free tier — stops when idle, wakes on request
+  auto_start_machines = true
+  min_machines_running = 0
+  [http_service.concurrency]
+    type = "requests"
+    soft_limit = 80
+    hard_limit = 100
+
+[[vm]]
+  size = "shared-cpu-1x"
+  memory = "256mb"

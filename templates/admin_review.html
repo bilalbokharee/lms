@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block title %}Review queue · Admin{% endblock %}
+{% block content %}
+<a href="{{ url_for('admin_dashboard') }}" class="lesson-back">&larr; Admin dashboard</a>
+<h1>Review queue</h1>
+<p class="muted">{{ queue|length }} pending submission{{ '' if queue|length == 1 else 's' }}. Read the reflection, click the project link, then approve or reject.</p>
+
+{% if queue|length == 0 %}
+  <div class="card" style="text-align:center;padding:32px;">
+    <p class="muted">All caught up. Nothing to review.</p>
+  </div>
+{% endif %}
+
+{% for q in queue %}
+  <div class="card">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px;">
+      <div>
+        <strong>{{ q.username }}</strong>
+        <span class="muted" style="font-size:13px;">submitted {{ q.completed_at }}</span>
+      </div>
+      <div class="muted" style="font-size:12px;">{{ q.phase_title }} → {{ q.module_title }}</div>
+    </div>
+
+    <h3 style="margin-bottom:6px;">{{ q.lesson_title }}</h3>
+    <div class="lesson-meta">
+      <span class="tag">~{{ q.lesson_hours }}h estimated</span>
+      {% set min_seconds = (q.lesson_hours * 30 * 60)|int %}
+      {% if min_seconds < 900 %}{% set min_seconds = 900 %}{% endif %}
+      {% set ratio = (q.seconds_at_complete / min_seconds * 100)|round|int if min_seconds else 0 %}
+      <span class="tag {% if ratio >= 100 %}success{% else %}warn{% endif %}">
+        Spent {{ (q.seconds_at_complete // 60) }}m ({{ ratio }}% of min)
+      </span>
+      {% if q.has_project %}<span class="tag accent">Project lesson</span>{% endif %}
+    </div>
+
+    {% if q.has_project %}
+      <p class="muted" style="font-size:13px;margin-top:14px;"><strong>Project spec:</strong> {{ q.project_text }}</p>
+    {% endif %}
+
+    <div style="margin-top:14px;">
+      <strong style="font-size:13px;color:var(--text-dim);">REFLECTION</strong>
+      <div class="card" style="background:var(--bg-elev);margin-top:6px;white-space:pre-wrap;">{{ q.reflection or '(none)' }}</div>
+    </div>
+
+    {% if q.submission_url %}
+      <div style="margin-top:14px;">
+        <strong style="font-size:13px;color:var(--text-dim);">SUBMISSION</strong>
+        <div class="card" style="background:var(--bg-elev);margin-top:6px;">
+          <a href="{{ q.submission_url }}" target="_blank" rel="noopener">{{ q.submission_url }}</a>
+          {% if q.submission_notes %}
+            <p class="muted" style="font-size:13px;margin-top:8px;">{{ q.submission_notes }}</p>
+          {% endif %}
+        </div>
+      </div>
+    {% endif %}
+
+    <form method="POST" action="{{ url_for('admin_review_decision', user_id=q.user_id, lesson_key=q.lesson_key) }}" style="margin-top:16px;">
+      <input type="text" name="reviewer_notes" placeholder="Optional reviewer notes (visible to learner)" style="margin-bottom:10px;">
+      <button type="submit" name="decision" value="approve" class="btn-success">✓ Approve</button>
+      <button type="submit" name="decision" value="reject" class="btn-danger" style="margin-left:8px;">✗ Reject</button>
+    </form>
+  </div>
+{% endfor %}
+{% endblock %}

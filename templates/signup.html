@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Sign up · Future-Proof Engineer{% endblock %}
+{% block content %}
+<div class="auth-wrap">
+  <h1>Create your account</h1>
+  <p class="muted" style="margin-top:0;">Track your progress through the AI engineering roadmap.</p>
+  <form method="POST" style="margin-top:20px;">
+    <label for="username">Username</label>
+    <input type="text" id="username" name="username" required autocomplete="username" minlength="3">
+
+    <label for="email">Email</label>
+    <input type="email" id="email" name="email" required autocomplete="email">
+
+    <label for="password">Password (min 8 chars)</label>
+    <input type="password" id="password" name="password" required autocomplete="new-password" minlength="8">
+
+    <button type="submit" style="width:100%;margin-top:6px;">Create account</button>
+  </form>
+  <p class="muted" style="text-align:center;margin-top:18px;font-size:13px;">
+    Already have an account? <a href="{{ url_for('login') }}">Sign in</a>
+  </p>
+</div>
+{% endblock %}

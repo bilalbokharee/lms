@@ -1,0 +1,170 @@
+{% extends "base.html" %}
+{% block title %}{{ lesson.title }} · From Bilal{% endblock %}
+{% block content %}
+<a href="{{ url_for('phase_view', phase_id=phase.id) }}" class="lesson-back">← {{ phase.title }}</a>
+<h1>{{ lesson.title }}</h1>
+<div class="lesson-meta">
+  <span class="tag">{{ module.title }}</span>
+  <span class="tag">~{{ lesson.hours }} hours</span>
+  {% if existing %}
+    {% if existing.status == 'approved' %}<span class="tag success">✓ Approved</span>
+    {% elif existing.status == 'pending-review' %}<span class="tag warn">⏳ Pending review</span>
+    {% elif existing.status == 'rejected' %}<span class="tag" style="background:rgba(239,68,68,0.14);color:#fca5a5;border-color:rgba(239,68,68,0.3);">✗ Rejected — try again</span>
+    {% endif %}
+  {% endif %}
+</div>
+
+<div class="lesson-section">
+  <h3>Objective</h3>
+  <p>{{ lesson.objective }}</p>
+</div>
+
+{% if lesson.reading %}
+<div class="lesson-section">
+  <h3>Reading & free resources</h3>
+  <ul class="lesson-list">
+    {% for r in lesson.reading %}
+      <li><a href="{{ r.url }}" target="_blank" rel="noopener">{{ r.name }}</a></li>
+    {% endfor %}
+  </ul>
+</div>
+{% endif %}
+
+{% if lesson.courses %}
+<div class="lesson-section">
+  <h3>Recommended courses</h3>
+  {% for c in lesson.courses %}
+    <a href="{{ c.url }}" target="_blank" rel="noopener" style="text-decoration:none;">
+      <div class="course-card">
+        <div class="platform">{{ c.platform }}{% if c.free_audit %} · free audit{% endif %}{% if c.highly_recommended %} · ★ top pick{% endif %}</div>
+        <div class="title">{{ c.title }}</div>
+        <span style="font-size:13px;color:var(--violet-2);">View course →</span>
+      </div>
+    </a>
+  {% endfor %}
+</div>
+{% endif %}
+
+{% if lesson.project %}
+<div class="lesson-section">
+  <h3>Hands-on project</h3>
+  <div class="project-block">🛠️ {{ lesson.project }}</div>
+</div>
+{% endif %}
+
+<!-- Submit block -->
+<div class="lesson-section">
+  <h3>Submit for review</h3>
+  <p class="muted" style="font-size:13px;">
+    Write a short reflection in your own words. Bilal bhai reviews each one before it counts toward your XP.
+  </p>
+
+  {% if existing and existing.status == 'pending-review' %}
+    <div class="card" style="background:rgba(245,158,11,0.06);border-color:rgba(245,158,11,0.3);">
+      <strong>⏳ Submitted — waiting for review.</strong>
+      <p class="muted" style="font-size:13px;margin:8px 0 0;">You can withdraw and resubmit if you want to revise.</p>
+      <form method="POST" style="margin-top:12px;">
+        <button type="submit" name="action" value="withdraw" class="btn-ghost">Withdraw submission</button>
+      </form>
+    </div>
+  {% elif existing and existing.status == 'approved' %}
+    <div class="card" style="background:rgba(132,204,22,0.06);border-color:rgba(132,204,22,0.3);">
+      <strong>✓ Approved.</strong> Counts toward your XP.
+      {% if existing.reviewer_notes %}
+        <p class="muted" style="font-size:13px;margin:8px 0 0;"><em>"{{ existing.reviewer_notes }}"</em></p>
+      {% endif %}
+    </div>
+  {% else %}
+    {% if existing and existing.status == 'rejected' and existing.reviewer_notes %}
+      <div class="flash error" style="margin-bottom:14px;">
+        <strong>Rejected:</strong> {{ existing.reviewer_notes }}
+      </div>
+    {% endif %}
+    <form method="POST" style="margin-top:14px;">
+      <input type="hidden" name="action" value="submit">
+
+      <label for="reflection">Reflection (min {{ reqs.reflection_min_chars }} chars) — what did you learn? what's still unclear?</label>
+      <textarea id="reflection" name="reflection" rows="5" minlength="{{ reqs.reflection_min_chars }}" required
+        placeholder="Real talk — Bilal bhai reads this. Bullshit gets rejected.">{{ existing.reflection if existing else '' }}</textarea>
+
+      {% if reqs.has_project %}
+        <label for="submission_url" style="margin-top:14px;">Project link (optional but encouraged) — GitHub repo, deployed URL, screenshot, or doc</label>
+        <input type="text" id="submission_url" name="submission_url"
+          value="{{ existing.submission_url if existing else '' }}"
+          placeholder="https://github.com/yourname/repo (optional)">
+
+        <label for="submission_notes">Notes about your project (optional)</label>
+        <textarea id="submission_notes" name="submission_notes" rows="2"
+          placeholder="Anything tricky? What did you learn?">{{ existing.submission_notes if existing else '' }}</textarea>
+      {% endif %}
+
+      <button type="submit" class="btn-success" style="margin-top:14px;">✨ Submit for review</button>
+    </form>
+  {% endif %}
+</div>
+
+<div class="lesson-actions">
+  {% if prev_link %}
+    <a class="btn-ghost btn" href="{{ url_for('lesson_view', phase_id=prev_link[0], m_idx=prev_link[1], l_idx=prev_link[2]) }}">← Previous</a>
+  {% endif %}
+  {% if next_link %}
+    <a class="btn" href="{{ url_for('lesson_view', phase_id=next_link[0], m_idx=next_link[1], l_idx=next_link[2]) }}">Next lesson →</a>
+  {% endif %}
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+// Lightweight passive heartbeat — no UI lock, just admin signal
+(function() {
+  const LESSON_KEY = {{ lesson_key|tojson }};
+  let lastBeat = Date.now();
+  let visible = !document.hidden;
+  document.addEventListener('visibilitychange', () => {
+    visible = !document.hidden;
+    lastBeat = Date.now();
+  });
+  async function beat() {
+    if (!visible) return;
+    const now = Date.now();
+    const delta = Math.min(60, Math.floor((now - lastBeat) / 1000));
+    lastBeat = now;
+    if (delta <= 0) return;
+    try {
+      await fetch('/api/heartbeat', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({lesson_key: LESSON_KEY, delta_seconds: delta})
+      });
+    } catch (e) {}
+  }
+  setInterval(beat, 30000);
+  window.addEventListener('beforeunload', () => {
+    const delta = Math.min(60, Math.floor((Date.now() - lastBeat) / 1000));
+    if (delta > 0 && navigator.sendBeacon) {
+      const blob = new Blob([JSON.stringify({lesson_key: LESSON_KEY, delta_seconds: delta})], {type: 'application/json'});
+      navigator.sendBeacon('/api/heartbeat', blob);
+    }
+  });
+})();
+
+// Confetti burst on successful submit (when flash 'success' is present)
+(function() {
+  const flashes = document.querySelectorAll('.flash.success');
+  if (!flashes.length) return;
+  const colors = ['#8b5cf6', '#ec4899', '#06b6d4', '#84cc16', '#f59e0b'];
+  for (let i = 0; i < 60; i++) {
+    const piece = document.createElement('div');
+    piece.className = 'confetti-piece';
+    piece.style.left = Math.random() * 100 + 'vw';
+    piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+    piece.style.animationDelay = (Math.random() * 0.5) + 's';
+    piece.style.animationDuration = (2 + Math.random() * 2) + 's';
+    piece.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+    piece.style.transform = `rotate(${Math.random() * 360}deg)`;
+    document.body.appendChild(piece);
+    setTimeout(() => piece.remove(), 4000);
+  }
+})();
+</script>
+{% endblock %}

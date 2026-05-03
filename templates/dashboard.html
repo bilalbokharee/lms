@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% block title %}Dashboard · From Bilal{% endblock %}
+{% block content %}
+
+<div class="hero">
+  <h1>Welcome back, {{ current_user.username }} 👋</h1>
+  <p>{{ curriculum_meta.tagline }}</p>
+
+  {% if rank %}
+  <div class="hero-rank">
+    <div class="rank-pill">
+      <span class="emoji">{{ rank.emoji }}</span>
+      <div>
+        <div><span class="name">{{ rank.name }}</span></div>
+        <div class="blurb">{{ rank.blurb }}</div>
+      </div>
+    </div>
+    {% if rank.next %}
+      <span class="next-rank">Next rank: <strong>{{ rank.next.emoji }} {{ rank.next.name }}</strong> at {{ rank.next.min_pct }}% complete</span>
+    {% else %}
+      <span class="next-rank">🏆 You're at the top tier. Now teach someone.</span>
+    {% endif %}
+  </div>
+  {% endif %}
+</div>
+
+<div class="stats-grid">
+  <div class="stat pct">
+    <span class="icon-bg">📊</span>
+    <div class="num">{{ overall_pct }}%</div>
+    <div class="lbl">Roadmap done</div>
+  </div>
+  <div class="stat xp">
+    <span class="icon-bg">⚡</span>
+    <div class="num">{{ xp }}</div>
+    <div class="lbl">XP earned</div>
+  </div>
+  <div class="stat streak">
+    <span class="icon-bg">🔥</span>
+    <div class="num">{{ streak }}</div>
+    <div class="lbl">Day streak</div>
+  </div>
+  <div class="stat">
+    <span class="icon-bg">⏳</span>
+    <div class="num">{{ pending_count }}</div>
+    <div class="lbl">Pending review</div>
+  </div>
+  <div class="stat">
+    <span class="icon-bg">📚</span>
+    <div class="num">{{ total_done }}/{{ total_all }}</div>
+    <div class="lbl">Lessons</div>
+  </div>
+</div>
+
+<div class="card">
+  <h3 style="margin-top:0;">Why this roadmap?</h3>
+  <p class="muted">{{ domains.intro }}</p>
+  <p style="margin-top:14px;"><strong>Primary track:</strong> <span class="tag accent">{{ domains.primary_recommendation }}</span></p>
+  <p class="muted" style="font-size:14px;">{{ domains.why_primary }}</p>
+  <details style="margin-top:14px;">
+    <summary style="cursor:pointer;color:var(--violet-2);font-weight:600;font-size:14px;">Other future-proof IT domains</summary>
+    <div class="domain-grid" style="margin-top:14px;">
+      {% for d in domains.domains %}
+      <div class="domain-card">
+        <div class="name">{{ d.name }}</div>
+        <div class="what">{{ d.what_you_do }}</div>
+        <div class="muted" style="font-size:12px;margin-top:8px;">{{ d.outlook }}</div>
+      </div>
+      {% endfor %}
+    </div>
+  </details>
+</div>
+
+<h2>Your Roadmap</h2>
+<div class="phase-grid">
+  {% for phase in phases %}
+    {% set s = stats[phase.id] %}
+    <a href="{{ url_for('phase_view', phase_id=phase.id) }}" class="phase-card" style="--phase-color: {{ phase.color or '#8b5cf6' }};">
+      <div class="phase-head">
+        <div class="phase-title-wrap">
+          <span class="phase-icon">{{ phase.icon or '📘' }}</span>
+          <div class="phase-title">{{ phase.title }}</div>
+        </div>
+        <div class="phase-meta">{{ phase.duration_weeks }} wks · {{ s.done }}/{{ s.total }}</div>
+      </div>
+      <div class="phase-objective">{{ phase.objective }}</div>
+      <div class="phase-stats">
+        <div class="progress"><div class="progress-fill {% if s.pct == 100 %}shimmer{% endif %}" style="width: {{ s.pct }}%; background: linear-gradient(90deg, {{ phase.color or '#8b5cf6' }}, var(--cyan));"></div></div>
+        <span class="phase-pct">{{ s.pct }}%</span>
+      </div>
+    </a>
+  {% endfor %}
+</div>
+{% endblock %}

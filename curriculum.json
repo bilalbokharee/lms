@@ -1,0 +1,684 @@
+{
+  "meta": {
+    "title": "Future-Proof Engineer Roadmap",
+    "tagline": "From 'what even is a computer' to a paid AI engineer — a roadmap you actually finish.",
+    "intended_audience": "A-Levels student (16–18) preparing for university, planning a career in software/AI in an AI-saturated job market.",
+    "total_estimated_months": "24–36 months at ~10–15 hrs/week, faster if full-time",
+    "philosophy": [
+      "Build > Watch. Every phase ends with a thing you made.",
+      "Vocabulary first. You can't learn what you can't name.",
+      "Fundamentals are the moat. AI can write a React component. AI cannot replace someone who deeply understands systems, math, and product judgment.",
+      "Earn early. By month 12 you should be making money — freelance, internships, or selling small products.",
+      "Public learning. Push every project to GitHub. Write short posts. Recruiters Google you."
+    ]
+  },
+  "future_proof_domains": {
+    "intro": "AI will eat repetitive coding. It will not eat the engineer who designs the system, debugs the weird edge case, owns the data pipeline, secures the infra, or builds the product. Below are the IT roles most likely to thrive — not survive — in 2030 and beyond.",
+    "primary_recommendation": "AI / ML Engineering (with deep CS fundamentals)",
+    "why_primary": "AI itself is the single biggest industry being built right now. The people who build, train, deploy, secure, and integrate AI systems are the most leveraged engineers on Earth. Compensation is the highest in tech, demand is growing, and the field is too young to have hit any ceiling. Even when AI writes most code, someone has to design the AI that writes the code.",
+    "domains": [
+      {"name": "AI / ML Engineering", "outlook": "Highest demand role through 2030+. Salaries 1.5–3x typical software roles.", "what_you_do": "Build, train, fine-tune, and deploy ML models — LLMs, recommendation systems, computer vision.", "why_safe": "You ARE the automation."},
+      {"name": "ML Infrastructure / MLOps", "outlook": "Severely under-supplied.", "what_you_do": "Build the systems that train, serve, and monitor ML models at scale.", "why_safe": "AI cannot debug a Kubernetes cluster melting down at 3am."},
+      {"name": "AI Safety, Alignment & Evaluation", "outlook": "Newest hot field. Anthropic, OpenAI, DeepMind hiring aggressively.", "what_you_do": "Test models, build guardrails, study how models fail, research interpretability.", "why_safe": "As models get more powerful, the bottleneck is trust, not capability."},
+      {"name": "Cybersecurity (AI-augmented)", "outlook": "Demand far exceeds supply.", "what_you_do": "Defend systems, pen-test, build secure cloud architecture.", "why_safe": "Adversarial — there is always a human attacker to outsmart."},
+      {"name": "Robotics & Embedded AI", "outlook": "Massive boom coming as humanoid robots leave research labs.", "what_you_do": "Combine ML with the physical world — drones, robots, self-driving.", "why_safe": "Physical world is messy and slow to automate."},
+      {"name": "Data Engineering", "outlook": "AI runs on data.", "what_you_do": "Build pipelines that move and transform massive amounts of data into ML-ready form.", "why_safe": "Foundational, every AI company needs them."},
+      {"name": "AI Product Management / Applied AI", "outlook": "Hybrid role exploding in demand.", "what_you_do": "Decide what AI products to build, how, for whom.", "why_safe": "Requires judgment, communication, taste — areas where AI is weakest."}
+    ]
+  },
+  "ranks": [
+    {"min_pct": 0,  "name": "Rookie",      "emoji": "🌱", "blurb": "Just sprouted. Welcome."},
+    {"min_pct": 5,  "name": "Trainee",     "emoji": "📘", "blurb": "Vocabulary is locking in."},
+    {"min_pct": 15, "name": "Apprentice",  "emoji": "🛠️", "blurb": "You can build small things."},
+    {"min_pct": 30, "name": "Builder",     "emoji": "🚀", "blurb": "Real apps, your hands."},
+    {"min_pct": 50, "name": "Engineer",    "emoji": "⚙️", "blurb": "You ship."},
+    {"min_pct": 70, "name": "Architect",   "emoji": "🏛️", "blurb": "You design systems."},
+    {"min_pct": 85, "name": "AI Engineer", "emoji": "🧠", "blurb": "You train models."},
+    {"min_pct": 95, "name": "Master",      "emoji": "👑", "blurb": "Hire-anywhere league."}
+  ],
+  "phases": [
+    {
+      "id": "phase-0",
+      "title": "Phase 0 — What Even Is a Computer?",
+      "color": "#06b6d4",
+      "icon": "💻",
+      "duration_weeks": "3–5",
+      "objective": "Build the vocabulary. Before code, before AI, before anything — understand what a computer is, what software is, what 'the cloud' actually means.",
+      "outcome": "You can explain to a non-technical friend what happens when they press a key, open a website, or close a laptop. You're no longer scared of the words.",
+      "modules": [
+        {
+          "title": "Hardware: the physical machine",
+          "lessons": [
+            {"title": "What's inside a computer? CPU, RAM, storage, GPU", "objective": "Understand the 5 essential parts of every computer and what each does.", "hours": 2,
+              "reading": [{"name": "Crash Course Computer Science Ep 1–3 (free YouTube)", "url": "https://www.youtube.com/playlist?list=PL8dPuuaLjXtNlUrzyH5r6jN9ulIgZBpdo"}, {"name": "How a CPU works (8-min animation)", "url": "https://www.youtube.com/watch?v=cNN_tTXABUA"}],
+              "courses": [], "project": "Open pcpartpicker.com. Design a $700 PC. Write 1 sentence per part explaining what it does."},
+            {"title": "Bits, bytes, and how computers store everything", "objective": "Why binary (0s and 1s) underlies text, images, music, video — everything.", "hours": 2,
+              "reading": [{"name": "Khan Academy — Digital information", "url": "https://www.khanacademy.org/computing/ap-computer-science-principles/x2d2f703b37b450a3:digital-information"}, {"name": "Code by Charles Petzold (book — chapters 1–4 are mind-blowing)", "url": "https://www.charlespetzold.com/code/"}],
+              "courses": [], "project": "Spell your first name in binary using ASCII (look up the table). Then in hex. No computer needed — just paper."},
+            {"title": "What's a phone, a laptop, a server? They're all computers", "objective": "Understand that the 'server' running Instagram is just a beefy computer in a warehouse.", "hours": 1,
+              "reading": [{"name": "What is a server? (Cloudflare)", "url": "https://www.cloudflare.com/learning/cloud/what-is-a-server/"}],
+              "courses": [], "project": "Take 5 different things you use today (phone, ATM, microwave, car infotainment, smart TV). For each: what's the CPU doing right now?"}
+          ]
+        },
+        {
+          "title": "Software: programs that bring hardware alive",
+          "lessons": [
+            {"title": "What is software? Operating systems, apps, websites", "objective": "Software = instructions. The OS manages everything else.", "hours": 2,
+              "reading": [{"name": "Crash Course CS Ep 18 — Operating Systems", "url": "https://www.youtube.com/watch?v=26QPDBe-NB8"}],
+              "courses": [], "project": "Make a list of all software running on your phone right now. Group them: OS-level vs apps you opened."},
+            {"title": "Files, folders, and how data is organized", "objective": "Everything you save lives in a file. Files live in folders. Get fluent with this.", "hours": 1,
+              "reading": [{"name": "How files work (visual)", "url": "https://www.gcfglobal.org/en/computerbasics/understanding-applications/1/"}],
+              "courses": [], "project": "Reorganize your Downloads folder into 4 subfolders: Documents, Images, Videos, Other. Move every file. Don't delete anything."}
+          ]
+        },
+        {
+          "title": "The internet & 'the cloud'",
+          "lessons": [
+            {"title": "What is the internet? (it's not just WiFi)", "objective": "The internet is cables in the ocean. WiFi is the last 30 feet. Big difference.", "hours": 2,
+              "reading": [{"name": "How the Internet Works in 5 minutes", "url": "https://www.youtube.com/watch?v=7_LPdttKXPc"}, {"name": "Submarine cable map (cool)", "url": "https://www.submarinecablemap.com/"}],
+              "courses": [], "project": "Look up where the cable from your country to the rest of the world physically lands. Most countries: 1–3 cables. Surprising, right?"},
+            {"title": "What happens when you type google.com?", "objective": "DNS, IP addresses, requests. The single most-asked question in tech interviews.", "hours": 2,
+              "reading": [{"name": "Cloudflare Learning — DNS basics", "url": "https://www.cloudflare.com/learning/dns/what-is-dns/"}, {"name": "What happens when... (legendary repo)", "url": "https://github.com/alex/what-happens-when"}],
+              "courses": [], "project": "In your own words, write a 1-page explanation of what happens when you load youtube.com. No copy-paste."},
+            {"title": "What is 'the cloud'? It's just someone else's computer", "objective": "Cloud = renting computers from Amazon/Google/Microsoft instead of owning them. That's literally it.", "hours": 1,
+              "reading": [{"name": "What is cloud computing? (AWS in plain English)", "url": "https://aws.amazon.com/what-is-cloud-computing/"}],
+              "courses": [], "project": "Pick 5 apps you use (Netflix, Instagram, Spotify…). Where does each store its data? Hint: AWS, GCP, or Azure."},
+            {"title": "App vs website vs SaaS vs platform — the vocabulary", "objective": "These words confuse beginners. After this lesson, they won't.", "hours": 1,
+              "reading": [{"name": "What is SaaS? (Salesforce, plain English)", "url": "https://www.salesforce.com/saas/"}],
+              "courses": [], "project": "Make a 2-column table: 5 things you use that are 'just websites' vs 5 that are 'apps'. What's the actual difference?"}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "phase-1",
+      "title": "Phase 1 — Your First Lines of Code (Python)",
+      "color": "#8b5cf6",
+      "icon": "🐍",
+      "duration_weeks": "5–7",
+      "objective": "Write your first program. Then your tenth. Python is the friendliest language and also the language of AI — perfect choice.",
+      "outcome": "You've written 5 small programs that actually do something. You're not scared of code anymore.",
+      "modules": [
+        {
+          "title": "Setting up + first programs",
+          "lessons": [
+            {"title": "Get coding without installing anything: Replit", "objective": "Don't waste a week installing Python. Use Replit in your browser, code immediately.", "hours": 1,
+              "reading": [{"name": "Replit — sign up free", "url": "https://replit.com/"}],
+              "courses": [], "project": "Sign up for Replit. Create a Python project. Write a program that prints 'Hello, [your name]!' three times. That's it. Take a screenshot."},
+            {"title": "What is programming? Variables, types, print", "objective": "A variable is a labeled box. Types tell the computer what kind of thing is in the box.", "hours": 2,
+              "reading": [{"name": "Python.org — Beginner's Guide", "url": "https://wiki.python.org/moin/BeginnersGuide/NonProgrammers"}],
+              "courses": [
+                {"platform": "Udemy", "title": "100 Days of Code: The Complete Python Pro Bootcamp (Angela Yu)", "url": "https://www.udemy.com/course/100-days-of-code/", "highly_recommended": true},
+                {"platform": "Coursera", "title": "Python for Everybody (University of Michigan)", "url": "https://www.coursera.org/specializations/python", "free_audit": true}],
+              "project": "Write a program that asks for your name and birth year, then prints 'Hi NAME, you are X years old.'"},
+            {"title": "Math, comparisons, booleans", "objective": "Computers are calculators with feelings. Master arithmetic and true/false.", "hours": 2,
+              "reading": [{"name": "Real Python — Operators", "url": "https://realpython.com/python-operators-expressions/"}],
+              "courses": [], "project": "Build a simple tip calculator: ask for bill total and number of people, print each person's share including 15% tip."}
+          ]
+        },
+        {
+          "title": "Decisions and repetition",
+          "lessons": [
+            {"title": "If, else, elif — making decisions", "objective": "Programs make choices. This is how.", "hours": 2,
+              "reading": [{"name": "Real Python — Conditional Statements", "url": "https://realpython.com/python-conditional-statements/"}],
+              "courses": [], "project": "Build a 'is it a leap year?' checker. Ask for a year, print yes/no using the leap year rule."},
+            {"title": "While and for loops — doing things repeatedly", "objective": "Computers love repetition. You'll save thousands of hours mastering loops.", "hours": 3,
+              "reading": [{"name": "Real Python — for/while loops", "url": "https://realpython.com/python-for-loop/"}],
+              "courses": [], "project": "Build rock-paper-scissors vs the computer. Best of 5. Track score."},
+            {"title": "Functions — packaging logic for reuse", "objective": "Don't repeat yourself. Wrap repeated logic in a function.", "hours": 3,
+              "reading": [{"name": "Real Python — Functions", "url": "https://realpython.com/defining-your-own-python-function/"}],
+              "courses": [], "project": "Make a calculator with separate functions for add, subtract, multiply, divide. Menu in a loop."}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "phase-2",
+      "title": "Phase 2 — Real Programming",
+      "color": "#10b981",
+      "icon": "📦",
+      "duration_weeks": "6–8",
+      "objective": "Step up from toy programs to real ones. Lists, files, errors, classes. The skills you actually use every day.",
+      "outcome": "You've built 3 multi-file programs that read/write data and don't crash on bad input.",
+      "modules": [
+        {
+          "title": "Working with collections of data",
+          "lessons": [
+            {"title": "Lists — ordered collections", "objective": "Most data comes in lists. Master them.", "hours": 3,
+              "reading": [{"name": "Real Python — Lists", "url": "https://realpython.com/python-lists-tuples/"}],
+              "courses": [], "project": "Build a to-do list program. Add, remove, mark done, show all. In-memory is fine."},
+            {"title": "Dictionaries — key-value pairs", "objective": "When you need to look things up by name, use a dict. Most-used data structure in Python.", "hours": 3,
+              "reading": [{"name": "Real Python — Dictionaries", "url": "https://realpython.com/python-dicts/"}],
+              "courses": [], "project": "Build a contact book using a dict. Add, search by name, update, delete."},
+            {"title": "Sets and tuples (briefly)", "objective": "When uniqueness matters or order shouldn't change.", "hours": 1,
+              "reading": [{"name": "Real Python — Sets", "url": "https://realpython.com/python-sets/"}],
+              "courses": [], "project": "Given a paragraph of text, find every unique word and how many times each appears."}
+          ]
+        },
+        {
+          "title": "Files, errors, real-world code",
+          "lessons": [
+            {"title": "Reading and writing files", "objective": "Programs that don't lose your data when they close. Major upgrade.", "hours": 3,
+              "reading": [{"name": "Real Python — Working with files", "url": "https://realpython.com/working-with-files-in-python/"}, {"name": "Automate the Boring Stuff (free book)", "url": "https://automatetheboringstuff.com/"}],
+              "courses": [{"platform": "Udemy", "title": "Automate the Boring Stuff with Python (Al Sweigart)", "url": "https://www.udemy.com/course/automate/"}],
+              "project": "Upgrade your to-do app: now it saves to and loads from a tasks.txt file."},
+            {"title": "Error handling — try/except", "objective": "Real programs handle bad input gracefully instead of crashing.", "hours": 2,
+              "reading": [{"name": "Real Python — Exceptions", "url": "https://realpython.com/python-exceptions/"}],
+              "courses": [], "project": "Take your tip calculator. Make it never crash, no matter what the user types."},
+            {"title": "JSON — the language of data on the web", "objective": "Every API speaks JSON. So do you, now.", "hours": 2,
+              "reading": [{"name": "Real Python — JSON", "url": "https://realpython.com/python-json/"}],
+              "courses": [], "project": "Save your contact book as a contacts.json file instead of a plain text file."}
+          ]
+        },
+        {
+          "title": "Object-Oriented Programming (OOP)",
+          "lessons": [
+            {"title": "Classes and objects — modeling things in code", "objective": "Most professional code is organized in classes. This is the dominant paradigm.", "hours": 5,
+              "reading": [{"name": "Real Python — OOP", "url": "https://realpython.com/python3-object-oriented-programming/"}],
+              "courses": [], "project": "Build a tiny text-RPG: Player and Enemy classes. Combat system. 5+ enemies, 3 weapons."}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "phase-3",
+      "title": "Phase 3 — The Engineer's Toolkit",
+      "color": "#f59e0b",
+      "icon": "🧰",
+      "duration_weeks": "4–6",
+      "objective": "Every professional engineer uses these tools daily: terminal, Git, GitHub, a real IDE, and AI helpers. None of them are optional.",
+      "outcome": "You can navigate a computer via the keyboard alone, save your code with Git, share it on GitHub, debug like a pro, and use AI as a coding partner without it doing the thinking for you.",
+      "modules": [
+        {
+          "title": "The terminal — talking to your computer directly",
+          "lessons": [
+            {"title": "Why engineers use the terminal", "objective": "It's faster, scriptable, and how every server talks. Click less, type more.", "hours": 2,
+              "reading": [{"name": "MIT Missing Semester — The Shell", "url": "https://missing.csail.mit.edu/2020/course-shell/"}],
+              "courses": [], "project": "Open a terminal (Mac/Linux) or PowerShell (Windows). Make a folder called 'practice', go into it, create 3 files, list them. Don't touch the mouse."},
+            {"title": "Essential commands: cd, ls, mkdir, mv, cp, rm, cat, grep", "objective": "The 10 commands you'll type a million times in your career.", "hours": 4,
+              "reading": [{"name": "MIT Missing Semester — Shell tools", "url": "https://missing.csail.mit.edu/2020/shell-tools/"}, {"name": "Linux Journey (free)", "url": "https://linuxjourney.com/"}],
+              "courses": [{"platform": "Udemy", "title": "Linux Mastery: The Linux Command Line in 11.5 Hours (Ziyad Yehia)", "url": "https://www.udemy.com/course/linux-mastery/"}],
+              "project": "Without using your mouse, organize a folder of 50 mixed files into Images/, Docs/, and Other/ subfolders. Document each command you used."}
+          ]
+        },
+        {
+          "title": "Git & GitHub — saving and sharing your code",
+          "lessons": [
+            {"title": "What is Git? Why every coder uses it", "objective": "Git is time travel for your code. Made a mistake? Roll back. Working with others? No more emailing zip files.", "hours": 2,
+              "reading": [{"name": "Pro Git book — Chapter 1 (free)", "url": "https://git-scm.com/book/en/v2/Getting-Started-About-Version-Control"}, {"name": "Atlassian — Git tutorial", "url": "https://www.atlassian.com/git/tutorials/what-is-git"}],
+              "courses": [], "project": "Install Git. Create a folder. Run `git init`. Add a file. Commit it. Change it. Commit again. Run `git log`. Marvel."},
+            {"title": "Commits, branches, merges", "objective": "Branches let you experiment without breaking the main code. Merges combine work.", "hours": 4,
+              "reading": [{"name": "Learn Git Branching (interactive game — best Git tutorial ever)", "url": "https://learngitbranching.js.org/"}],
+              "courses": [{"platform": "Udemy", "title": "The Git & GitHub Bootcamp (Colt Steele)", "url": "https://www.udemy.com/course/git-and-github-bootcamp/", "highly_recommended": true}],
+              "project": "Complete the Learn Git Branching interactive tutorial all the way through."},
+            {"title": "GitHub — your code on the internet", "objective": "GitHub is where the world's code lives. Your portfolio, every job application, every open source project.", "hours": 3,
+              "reading": [{"name": "GitHub Skills (interactive courses)", "url": "https://skills.github.com/"}, {"name": "How to write a great README", "url": "https://github.com/matiassingers/awesome-readme"}],
+              "courses": [], "project": "Sign up on GitHub. Push your contact book and to-do list projects to public repos. Write a real README for each."},
+            {"title": "Pull requests & contributing to others' code", "objective": "How real teams ship software together. Also how you contribute to open source.", "hours": 2,
+              "reading": [{"name": "GitHub — about pull requests", "url": "https://docs.github.com/en/pull-requests"}],
+              "courses": [], "project": "Find any beginner-friendly open source repo (good-first-issue tag). Open a PR — even a typo fix in the README counts. Welcome to open source."}
+          ]
+        },
+        {
+          "title": "IDEs, debugging, and getting help",
+          "lessons": [
+            {"title": "VS Code — the editor everyone uses", "objective": "Free, fast, extensible. Most-used code editor on Earth.", "hours": 2,
+              "reading": [{"name": "VS Code — Get started", "url": "https://code.visualstudio.com/docs/getstarted/getting-started"}, {"name": "Top extensions for Python", "url": "https://code.visualstudio.com/docs/languages/python"}],
+              "courses": [], "project": "Install VS Code. Install the Python and GitLens extensions. Open one of your earlier projects and run it from inside VS Code."},
+            {"title": "Debugging like a pro", "objective": "When code doesn't work, you don't guess. You debug. Breakpoints, print debugging, reading error messages carefully.", "hours": 3,
+              "reading": [{"name": "Rubber duck debugging (the classic technique)", "url": "https://rubberduckdebugging.com/"}, {"name": "How to debug in VS Code", "url": "https://code.visualstudio.com/docs/editor/debugging"}],
+              "courses": [], "project": "Take a project you've built. Intentionally break it 3 times in 3 different ways. Use the VS Code debugger to find each bug. Document your process."},
+            {"title": "Reading documentation (a superpower)", "objective": "Docs feel intimidating. Once you can read them, you can learn anything.", "hours": 2,
+              "reading": [{"name": "How to read documentation (article)", "url": "https://www.freecodecamp.org/news/how-to-read-documentation/"}],
+              "courses": [], "project": "Pick a Python library you've never used (e.g., `requests`). Using ONLY its docs, write a program that fetches a webpage and prints the title."},
+            {"title": "Asking for help: Stack Overflow + Discord + AI", "objective": "Engineers don't memorize. They look up. Mastering this is half the job.", "hours": 1,
+              "reading": [{"name": "How to ask a good question (Stack Overflow)", "url": "https://stackoverflow.com/help/how-to-ask"}],
+              "courses": [], "project": "Join 2 Discord communities for programming beginners. Ask one real question (after trying for 10 min yourself). Help answer one beginner question."}
+          ]
+        },
+        {
+          "title": "AI as your coding partner",
+          "lessons": [
+            {"title": "Using Claude / ChatGPT / Copilot to learn faster", "objective": "AI is the best tutor in the world if you use it right. The wrong way: copy-paste solutions. The right way: ask it to explain.", "hours": 2,
+              "reading": [{"name": "Anthropic — prompt engineering guide", "url": "https://docs.claude.com/en/docs/build-with-claude/prompt-engineering/overview"}, {"name": "How to use AI for learning code, not avoiding it", "url": "https://www.deeplearning.ai/short-courses/"}],
+              "courses": [{"platform": "DeepLearning.AI (free)", "title": "ChatGPT Prompt Engineering for Developers", "url": "https://learn.deeplearning.ai/chatgpt-prompt-eng/", "free_audit": true}],
+              "project": "Re-do one of your earlier projects WITH AI as a tutor. Rule: never copy code blindly. Ask it to explain every line you don't understand. Compare with how long the project took the first time."},
+            {"title": "When AI is wrong (and how to spot it)", "objective": "AI confidently lies. If you can't tell when, you'll ship broken code.", "hours": 2,
+              "reading": [{"name": "AI hallucinations explained", "url": "https://www.ibm.com/topics/ai-hallucinations"}],
+              "courses": [], "project": "Ask Claude/ChatGPT 5 questions about Python where you already know the answer. Try to catch it being subtly wrong. Document any errors."}
+          ]
+        }
+      ],
+      "earning_milestone": "MILESTONE: After this phase you can credibly call yourself a junior dev. With Python + Git + GitHub + a portfolio of 4–5 small repos, you can already start getting tutoring gigs (helping younger students learn Python) for ₹500–2000/hr in your local area, or on platforms like Preply."
+    },
+    {
+      "id": "phase-4",
+      "title": "Phase 4 — Databases: Where Data Lives",
+      "color": "#ec4899",
+      "icon": "🗄️",
+      "duration_weeks": "5–7",
+      "objective": "Almost every app has a database. Understand SQL, schemas, and how to make data persist beyond your program.",
+      "outcome": "You can design a database schema, write SQL queries, and build a Python app backed by a real database.",
+      "modules": [
+        {
+          "title": "Database fundamentals",
+          "lessons": [
+            {"title": "What is a database? Why not just use files?", "objective": "Databases handle: many users at once, fast lookup, complex relationships, durability. Files don't.", "hours": 2,
+              "reading": [{"name": "What is a database? (Oracle plain English)", "url": "https://www.oracle.com/database/what-is-database/"}, {"name": "MongoDB — Database basics", "url": "https://www.mongodb.com/resources/basics"}],
+              "courses": [], "project": "Pick 5 apps you use. For each, list 3 things they store in a database. (Instagram: posts, users, likes…)"},
+            {"title": "Relational vs NoSQL — the two big families", "objective": "Relational (SQL): structured tables. NoSQL: flexible documents. Each has its uses.", "hours": 2,
+              "reading": [{"name": "MongoDB — SQL vs NoSQL", "url": "https://www.mongodb.com/resources/compare/nosql-vs-sql"}],
+              "courses": [], "project": "For 5 different scenarios (banking, Twitter, Spotify playlists, file storage, real-time gaming), decide: SQL or NoSQL? Defend each pick."}
+          ]
+        },
+        {
+          "title": "SQL fundamentals",
+          "lessons": [
+            {"title": "SELECT, INSERT, UPDATE, DELETE — the four verbs", "objective": "These four operations cover 95% of database work. Get fluent.", "hours": 5,
+              "reading": [{"name": "SQLBolt (interactive, free, brilliant)", "url": "https://sqlbolt.com/"}, {"name": "Mode SQL Tutorial", "url": "https://mode.com/sql-tutorial/"}],
+              "courses": [{"platform": "Udemy", "title": "The Ultimate MySQL Bootcamp (Colt Steele)", "url": "https://www.udemy.com/course/the-ultimate-mysql-bootcamp-go-from-sql-beginner-to-expert/", "highly_recommended": true}],
+              "project": "Complete every exercise on SQLBolt."},
+            {"title": "JOINs — connecting tables", "objective": "The hardest, most-asked SQL concept. Once you get it, you can answer any data question.", "hours": 4,
+              "reading": [{"name": "A visual explanation of SQL JOINs", "url": "https://blog.codinghorror.com/a-visual-explanation-of-sql-joins/"}],
+              "courses": [], "project": "Solve all the JOIN exercises on SQLZoo or LeetCode SQL easy section (~10 problems)."},
+            {"title": "Designing a schema — the art of database modeling", "objective": "Bad schema = forever pain. Learn to design before you code.", "hours": 3,
+              "reading": [{"name": "Database design basics (PlanetScale)", "url": "https://planetscale.com/learn/courses/mysql-for-developers/schema-design/introduction-to-database-design"}],
+              "courses": [], "project": "Design (on paper) a schema for a small library: books, members, loans, fines. List every table, column, type, and relationship."}
+          ]
+        },
+        {
+          "title": "Real databases in code",
+          "lessons": [
+            {"title": "SQLite — the database in a single file", "objective": "Perfect for small apps and learning. Ships with Python.", "hours": 3,
+              "reading": [{"name": "Python sqlite3 docs", "url": "https://docs.python.org/3/library/sqlite3.html"}],
+              "courses": [], "project": "Rewrite your contact book as a Python program backed by SQLite. Persists between runs."},
+            {"title": "PostgreSQL — the production-grade SQL database", "objective": "What real companies use. Get familiar early.", "hours": 3,
+              "reading": [{"name": "PostgreSQL Tutorial", "url": "https://www.postgresqltutorial.com/"}],
+              "courses": [], "project": "Install Postgres locally OR use a free Supabase account. Migrate your contact-book schema. Run 5 useful queries."},
+            {"title": "MongoDB — your first NoSQL database", "objective": "Documents instead of tables. Useful for flexible / nested data.", "hours": 3,
+              "reading": [{"name": "MongoDB University — M001 Basics (free)", "url": "https://learn.mongodb.com/courses/m001-mongodb-basics"}],
+              "courses": [], "project": "Free MongoDB Atlas account. Insert 100 fake user documents. Write 5 queries (find, filter, update, sort, aggregate)."}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "phase-5",
+      "title": "Phase 5 — Building Things People See (Frontend)",
+      "color": "#3b82f6",
+      "icon": "🎨",
+      "duration_weeks": "8–10",
+      "objective": "HTML, CSS, and JavaScript — what every webpage on Earth is built from. By the end, you can build websites that look great.",
+      "outcome": "Two deployed websites: a personal portfolio and a working interactive app.",
+      "modules": [
+        {
+          "title": "HTML & CSS — structure and style",
+          "lessons": [
+            {"title": "HTML basics — the skeleton of every webpage", "objective": "Tags, elements, attributes. The 'nouns' of the web.", "hours": 4,
+              "reading": [{"name": "MDN — HTML basics", "url": "https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/HTML_basics"}, {"name": "freeCodeCamp HTML curriculum (free)", "url": "https://www.freecodecamp.org/learn/2022/responsive-web-design/"}],
+              "courses": [
+                {"platform": "Udemy", "title": "The Web Developer Bootcamp 2024 (Colt Steele)", "url": "https://www.udemy.com/course/the-web-developer-bootcamp/", "highly_recommended": true},
+                {"platform": "Free", "title": "The Odin Project — full free fullstack curriculum", "url": "https://www.theodinproject.com/"}],
+              "project": "Build a static personal page about yourself. 1 page, no styling yet."},
+            {"title": "CSS — making things beautiful", "objective": "Colors, fonts, spacing, layout. The 'art' of web dev.", "hours": 6,
+              "reading": [{"name": "CSS Tricks — A complete guide to flexbox", "url": "https://css-tricks.com/snippets/css/a-guide-to-flexbox/"}, {"name": "MDN CSS first steps", "url": "https://developer.mozilla.org/en-US/docs/Learn/CSS/First_steps"}],
+              "courses": [], "project": "Style your personal page. Make it actually nice. Mobile responsive."},
+            {"title": "Responsive design — looks good on phones too", "objective": "Most users are on mobile. Don't make them pinch-zoom.", "hours": 3,
+              "reading": [{"name": "MDN — Responsive design basics", "url": "https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Responsive_Design"}],
+              "courses": [], "project": "Open your personal page on your phone. Fix everything broken. Use Chrome devtools mobile mode."},
+            {"title": "Cloning a real site to lock in skills", "objective": "Pick a brand. Rebuild their homepage. The fastest way to level up.", "hours": 8,
+              "reading": [],
+              "courses": [], "project": "Clone the homepage of Stripe, Linear, or Apple. Mobile-responsive. No copy-paste of their code — recreate from scratch."}
+          ]
+        },
+        {
+          "title": "JavaScript — making the web interactive",
+          "lessons": [
+            {"title": "JavaScript fundamentals", "objective": "Variables, functions, arrays — basically Python with weird syntax. The most-used language on Earth.", "hours": 8,
+              "reading": [{"name": "javascript.info (free book — best on the internet)", "url": "https://javascript.info/"}],
+              "courses": [{"platform": "Udemy", "title": "The Complete JavaScript Course (Jonas Schmedtmann)", "url": "https://www.udemy.com/course/the-complete-javascript-course/", "highly_recommended": true}],
+              "project": "Build a tip calculator as a webpage with HTML + JS. Update result as user types."},
+            {"title": "DOM manipulation — code that changes the page", "objective": "How JavaScript talks to HTML. The core of interactivity.", "hours": 5,
+              "reading": [{"name": "MDN — DOM basics", "url": "https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction"}],
+              "courses": [], "project": "Build a to-do list webpage. Add items, mark done, delete. All interactive."},
+            {"title": "Fetch and APIs — pulling data from the internet", "objective": "Most modern apps fetch data from servers. Time to do that yourself.", "hours": 4,
+              "reading": [{"name": "MDN — Fetch API", "url": "https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API"}],
+              "courses": [], "project": "Build a weather app. User types a city, page shows the weather. Use OpenWeatherMap free API."}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "phase-6",
+      "title": "Phase 6 — Modern Frontend with React",
+      "color": "#06b6d4",
+      "icon": "⚛️",
+      "duration_weeks": "5–7",
+      "objective": "React is the dominant UI framework. The most-asked-for skill on every frontend job listing.",
+      "outcome": "Two React apps deployed to a public URL.",
+      "modules": [
+        {
+          "title": "React fundamentals",
+          "lessons": [
+            {"title": "Why React? Components and the virtual DOM", "objective": "Build UIs as reusable Lego blocks. Once you click, you'll never go back to vanilla JS.", "hours": 4,
+              "reading": [{"name": "React official tutorial — Tic Tac Toe (best React intro)", "url": "https://react.dev/learn/tutorial-tic-tac-toe"}],
+              "courses": [
+                {"platform": "Udemy", "title": "React - The Complete Guide (Maximilian Schwarzmüller)", "url": "https://www.udemy.com/course/react-the-complete-guide-incl-redux/", "highly_recommended": true}],
+              "project": "Complete the official React Tic Tac Toe tutorial."},
+            {"title": "Components, props, state", "objective": "The three concepts you'll use 1000 times a day in React.", "hours": 6,
+              "reading": [{"name": "React docs — Describing the UI", "url": "https://react.dev/learn/describing-the-ui"}],
+              "courses": [], "project": "Build a movie tracker: search via TMDB free API, mark watched, save favorites."},
+            {"title": "Hooks: useState, useEffect", "objective": "How modern React handles state and side effects.", "hours": 5,
+              "reading": [{"name": "React docs — Hooks", "url": "https://react.dev/reference/react"}],
+              "courses": [], "project": "Build a Pomodoro timer. Customizable durations. Saves history of completed sessions."},
+            {"title": "Styling React: Tailwind CSS", "objective": "Tailwind is the dominant styling approach in 2026. Fast, consistent, awesome.", "hours": 3,
+              "reading": [{"name": "Tailwind docs — Get started", "url": "https://tailwindcss.com/docs/installation"}],
+              "courses": [], "project": "Restyle your movie tracker with Tailwind. Make it look like a real product."}
+          ]
+        }
+      ],
+      "earning_milestone": "MILESTONE: At ~12–14 months in, you can take small frontend freelance gigs. Going rates: $15–40/hr to start, $50–80/hr after a few projects under your belt. Open profiles on Upwork, Fiverr, Toptal (later), and your local equivalent."
+    },
+    {
+      "id": "phase-7",
+      "title": "Phase 7 — Backend & Full-Stack Apps",
+      "color": "#10b981",
+      "icon": "🔌",
+      "duration_weeks": "8–10",
+      "objective": "Build the server side. APIs, authentication, full-stack apps where everything you've learned comes together.",
+      "outcome": "One full-stack app you'd be proud to demo. Deployed. Real users could sign up.",
+      "modules": [
+        {
+          "title": "Servers, HTTP, REST",
+          "lessons": [
+            {"title": "What is a backend? What's a server?", "objective": "The part of an app you can't see — but everything depends on.", "hours": 2,
+              "reading": [{"name": "What is a server? (visual)", "url": "https://www.cloudflare.com/learning/cloud/what-is-a-server/"}],
+              "courses": [], "project": "Draw on paper how Instagram works end-to-end: phone app → server → database → back to phone."},
+            {"title": "HTTP, REST, and APIs", "objective": "The conversation protocol between any two computers on the web.", "hours": 4,
+              "reading": [{"name": "MDN — HTTP overview", "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview"}, {"name": "What is REST? (Restful API)", "url": "https://restfulapi.net/"}],
+              "courses": [], "project": "Use Postman or curl to call 3 different public APIs (GitHub, OpenWeather, Pokémon). Make a table of each: endpoint, method, what you got back."}
+          ]
+        },
+        {
+          "title": "Build a backend",
+          "lessons": [
+            {"title": "FastAPI (Python) OR Express (Node.js) — pick one and go deep", "objective": "Both are excellent. Pick the language you prefer and master that stack.", "hours": 12,
+              "reading": [{"name": "FastAPI tutorial (best framework docs on the internet)", "url": "https://fastapi.tiangolo.com/tutorial/"}, {"name": "Express docs — getting started", "url": "https://expressjs.com/en/starter/installing.html"}],
+              "courses": [
+                {"platform": "Udemy", "title": "FastAPI - The Complete Course (Eric Roby)", "url": "https://www.udemy.com/course/fastapi-the-complete-course/"},
+                {"platform": "Udemy", "title": "Node.js, Express, MongoDB & More: The Complete Bootcamp (Jonas Schmedtmann)", "url": "https://www.udemy.com/course/nodejs-express-mongodb-bootcamp/"}],
+              "project": "Build a backend for a notes app: create, read, update, delete notes. Connect to a real database."},
+            {"title": "Authentication: signup, login, sessions, JWT", "objective": "Let people have accounts. The most-asked feature in any real app.", "hours": 5,
+              "reading": [{"name": "What is JWT? (Auth0)", "url": "https://jwt.io/introduction"}],
+              "courses": [], "project": "Add user signup/login to your notes backend. Hashed passwords. Each user only sees their own notes."}
+          ]
+        },
+        {
+          "title": "Full-stack: connecting it all",
+          "lessons": [
+            {"title": "Connect React to your backend", "objective": "Frontend + backend talk via HTTP. Now you have a complete app.", "hours": 6,
+              "reading": [],
+              "courses": [], "project": "Build a React frontend for your notes API. Login, create notes, edit, delete. Deploy both."},
+            {"title": "Real-world full-stack project", "objective": "One project you'd put on a resume. Pick something you actually want to use.", "hours": 20,
+              "reading": [],
+              "courses": [], "project": "Build something real: a habit tracker, a reading log, a workout planner, a study group finder. Anything you'd actually use. Deploy it. Get 5 friends to try it."}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "phase-8",
+      "title": "Phase 8 — Shipping Software (Cloud, DevOps, Application Delivery)",
+      "color": "#f97316",
+      "icon": "🚀",
+      "duration_weeks": "5–7",
+      "objective": "Code on your laptop is worthless. Code running for users is everything. This phase covers the journey from 'works on my machine' to a real public app.",
+      "outcome": "You can deploy any app you build to a real URL with HTTPS, logging, and automatic updates on every commit.",
+      "modules": [
+        {
+          "title": "The cloud demystified",
+          "lessons": [
+            {"title": "AWS, GCP, Azure — what they actually are", "objective": "Three companies rent out 95% of the world's computing. Understand the basics of each.", "hours": 3,
+              "reading": [{"name": "AWS Cloud Practitioner Essentials (free)", "url": "https://aws.amazon.com/training/digital/aws-cloud-practitioner-essentials/"}],
+              "courses": [
+                {"platform": "Udemy", "title": "AWS Certified Cloud Practitioner CLF-C02 (Stephane Maarek)", "url": "https://www.udemy.com/course/aws-certified-cloud-practitioner-new/", "highly_recommended": true}],
+              "project": "Sign up for AWS free tier. Spin up a t2.micro EC2. SSH into it. Stop and delete it. Don't get charged."},
+            {"title": "IaaS vs PaaS vs SaaS — the three layers", "objective": "Bare servers (IaaS), hosted environments (PaaS), full apps (SaaS). Pick your altitude.", "hours": 1,
+              "reading": [{"name": "IaaS vs PaaS vs SaaS (IBM)", "url": "https://www.ibm.com/topics/iaas-paas-saas"}],
+              "courses": [], "project": "Categorize 10 services you know: AWS EC2, Heroku, Vercel, Notion, Render, Salesforce, Kubernetes, GitHub, Spotify, Cloudflare. Each is which?"}
+          ]
+        },
+        {
+          "title": "Containers and Docker",
+          "lessons": [
+            {"title": "What is Docker? Why everyone uses it", "objective": "Package any app with all its dependencies into one runnable image. The unit of modern deployment.", "hours": 4,
+              "reading": [{"name": "Docker — Get Started", "url": "https://docs.docker.com/get-started/"}, {"name": "Docker for Beginners (free guide)", "url": "https://docker-curriculum.com/"}],
+              "courses": [{"platform": "Udemy", "title": "Docker & Kubernetes: The Practical Guide (Maximilian Schwarzmüller)", "url": "https://www.udemy.com/course/docker-kubernetes-the-practical-guide/"}],
+              "project": "Containerize your full-stack project. Push the image to Docker Hub. Run it on someone else's machine to prove it works."}
+          ]
+        },
+        {
+          "title": "CI/CD and deployment",
+          "lessons": [
+            {"title": "What does 'going to production' mean?", "objective": "The discipline of safely getting your code in front of users.", "hours": 2,
+              "reading": [{"name": "What is CI/CD? (GitLab)", "url": "https://about.gitlab.com/topics/ci-cd/"}],
+              "courses": [], "project": "Watch any 'inside Spotify/Netflix engineering' deployment talk on YouTube. Take 1 page of notes."},
+            {"title": "Deploying for free: Vercel, Render, Fly.io", "objective": "Three excellent free hosting options for real apps.", "hours": 4,
+              "reading": [{"name": "Vercel docs (frontend hosting)", "url": "https://vercel.com/docs"}, {"name": "Render docs (full-stack)", "url": "https://render.com/docs"}, {"name": "Fly.io docs (full-stack with persistence)", "url": "https://fly.io/docs/"}],
+              "courses": [], "project": "Deploy your full-stack project to a real public URL on one of these. Share the link on LinkedIn."},
+            {"title": "CI/CD with GitHub Actions", "objective": "Auto-test and auto-deploy on every commit. Standard in 2026.", "hours": 4,
+              "reading": [{"name": "GitHub Actions Quickstart", "url": "https://docs.github.com/en/actions/quickstart"}],
+              "courses": [], "project": "Set up a GitHub Action: on every PR to your project, run tests automatically. On merge to main, auto-deploy."},
+            {"title": "Logs, monitoring, and waking up at 3am", "objective": "How real engineers know when their app breaks before users complain.", "hours": 2,
+              "reading": [{"name": "What are logs? (Datadog)", "url": "https://www.datadoghq.com/knowledge-center/logging/"}, {"name": "Sentry — error monitoring (free tier)", "url": "https://sentry.io/welcome/"}],
+              "courses": [], "project": "Add Sentry (free) to your deployed app. Trigger a test error. Confirm you see it in the dashboard."}
+          ]
+        }
+      ],
+      "earning_milestone": "MILESTONE: With Phase 1–8 done you're a competent junior full-stack developer. You can credibly apply for: paid internships (₹40k–80k/mo or $1500–3000/mo at international startups), full-stack freelance projects ($30–60/hr), and your first product launch. This is roughly the 18–22 month mark."
+    },
+    {
+      "id": "phase-9",
+      "title": "Phase 9 — CS Fundamentals & Interview Prep",
+      "color": "#a855f7",
+      "icon": "🎓",
+      "duration_weeks": "8–10",
+      "objective": "The skills that get you past the technical interview at any serious company. Skip-able if your goal is freelance/indie. Critical if your goal is FAANG / top startup.",
+      "outcome": "You can solve LeetCode Easy comfortably and most Mediums. You understand system design fundamentals.",
+      "modules": [
+        {
+          "title": "Data structures & algorithms",
+          "lessons": [
+            {"title": "Big-O notation — measuring efficiency", "objective": "Why one solution can be 1000x faster than another with same output.", "hours": 3,
+              "reading": [{"name": "Big-O Cheat Sheet", "url": "https://www.bigocheatsheet.com/"}],
+              "courses": [], "project": "Write two versions of 'find duplicates in a list': O(n²) and O(n). Time them on lists of 100, 1k, 10k, 100k. Plot the difference."},
+            {"title": "Arrays, hashmaps, stacks, queues, linked lists", "objective": "The 5 data structures used in 90% of all code.", "hours": 12,
+              "reading": [{"name": "NeetCode roadmap (free, the gold standard)", "url": "https://neetcode.io/roadmap"}],
+              "courses": [
+                {"platform": "Udemy", "title": "Master the Coding Interview: Data Structures + Algorithms (Andrei Neagoie)", "url": "https://www.udemy.com/course/master-the-coding-interview-data-structures-algorithms/", "highly_recommended": true},
+                {"platform": "Udemy", "title": "JavaScript Algorithms and Data Structures Masterclass (Colt Steele)", "url": "https://www.udemy.com/course/js-algorithms-and-data-structures-masterclass/"}],
+              "project": "Solve the first 30 problems of NeetCode 150. Push solutions with explanations to a GitHub repo."},
+            {"title": "Trees, graphs, recursion", "objective": "The conceptual leap. Recursion is the single skill that unlocks everything else.", "hours": 12,
+              "reading": [{"name": "NeetCode tree & graph videos", "url": "https://neetcode.io/"}],
+              "courses": [], "project": "Solve 30 more NeetCode problems. Include 10 tree problems and 5 graph problems."},
+            {"title": "Dynamic programming (the boss fight)", "objective": "DP is the hardest interview topic. Practice early, practice often.", "hours": 10,
+              "reading": [{"name": "DP for Beginners (Leetcode list)", "url": "https://leetcode.com/discuss/general-discussion/662866/"}],
+              "courses": [], "project": "Solve 10 classic DP problems: climbing stairs, house robber, longest common subsequence, coin change, edit distance, etc."}
+          ]
+        },
+        {
+          "title": "System design basics",
+          "lessons": [
+            {"title": "How to design Twitter (or any large system)", "objective": "Senior interviews are 50% system design. Start now.", "hours": 8,
+              "reading": [{"name": "System Design Primer (free GitHub repo)", "url": "https://github.com/donnemartin/system-design-primer"}, {"name": "ByteByteGo videos (free YouTube)", "url": "https://www.youtube.com/@ByteByteGo"}],
+              "courses": [], "project": "Whiteboard (paper is fine): how would YOU design Twitter? Address: feed, posting, follows, scale to 100M users. Compare your design to ByteByteGo's video. Iterate."}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "phase-10",
+      "title": "Phase 10 — Math for Machine Learning",
+      "color": "#eab308",
+      "icon": "📐",
+      "duration_weeks": "6–8",
+      "objective": "You don't need to be a mathematician. But to UNDERSTAND ML — not just call .fit() — you need linear algebra, calculus, and probability. Skip this and you'll be a tutorial coder forever.",
+      "outcome": "You can read an ML paper's equations and follow along. You understand WHY gradient descent works.",
+      "modules": [
+        {
+          "title": "Linear algebra",
+          "lessons": [
+            {"title": "Vectors, matrices, dot products", "objective": "The language ML is written in. Every neural network is a chain of matrix multiplies.", "hours": 8,
+              "reading": [{"name": "3Blue1Brown — Essence of Linear Algebra (the single best math series ever made)", "url": "https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab"}],
+              "courses": [
+                {"platform": "Coursera", "title": "Mathematics for Machine Learning Specialization (Imperial College London)", "url": "https://www.coursera.org/specializations/mathematics-machine-learning", "highly_recommended": true}],
+              "project": "Implement matrix multiplication from scratch in Python (no NumPy). Verify against NumPy's output."},
+            {"title": "Eigenvectors, eigenvalues, PCA intuition", "objective": "The deeper layer. Used in dimensionality reduction, recommender systems.", "hours": 4,
+              "reading": [{"name": "3Blue1Brown — Eigenvectors", "url": "https://www.youtube.com/watch?v=PFDu9oVAE-g"}],
+              "courses": [], "project": "Apply PCA (using sklearn) to a 100-dimensional dataset. Reduce to 2D. Plot."}
+          ]
+        },
+        {
+          "title": "Calculus & probability",
+          "lessons": [
+            {"title": "Derivatives, chain rule, gradients", "objective": "Calculus is the engine of ML. Backpropagation IS the chain rule.", "hours": 8,
+              "reading": [{"name": "3Blue1Brown — Essence of Calculus", "url": "https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr"}],
+              "courses": [], "project": "By hand, compute the gradient of f(x,y) = x²y + sin(y) at (1, π/2)."},
+            {"title": "Probability, distributions, Bayes' theorem", "objective": "ML is applied probability. Master uncertainty.", "hours": 10,
+              "reading": [{"name": "Khan Academy — Statistics & Probability", "url": "https://www.khanacademy.org/math/statistics-probability"}],
+              "courses": [
+                {"platform": "Coursera", "title": "Statistics with Python Specialization (UMichigan)", "url": "https://www.coursera.org/specializations/statistics-with-python"}],
+              "project": "Simulate rolling a die 10,000 times in Python. Plot the distribution. Verify mean is ~3.5."}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "phase-11",
+      "title": "Phase 11 — Machine Learning Foundations",
+      "color": "#ef4444",
+      "icon": "🤖",
+      "duration_weeks": "10–12",
+      "objective": "Classical ML — the algorithms behind 80% of real-world ML systems still in production. Learn this BEFORE jumping to deep learning.",
+      "outcome": "You can build, train, evaluate, and deploy a model end-to-end. 2 ML projects on GitHub.",
+      "modules": [
+        {
+          "title": "Core ML",
+          "lessons": [
+            {"title": "Supervised vs unsupervised, train/test, overfitting", "objective": "The mental model every ML engineer carries.", "hours": 6,
+              "reading": [],
+              "courses": [
+                {"platform": "Coursera", "title": "Machine Learning Specialization (Andrew Ng / DeepLearning.AI)", "url": "https://www.coursera.org/specializations/machine-learning-introduction", "highly_recommended": true},
+                {"platform": "Udemy", "title": "Machine Learning A-Z: AI, Python & R (Kirill Eremenko)", "url": "https://www.udemy.com/course/machinelearning/"}],
+              "project": "Train a model to predict housing prices on the California Housing dataset. Compare 3 algorithms."},
+            {"title": "The classical algorithm zoo: linear/logistic regression, trees, random forests, SVM, k-NN", "objective": "Each is still production-relevant in 2026.", "hours": 18,
+              "reading": [{"name": "scikit-learn user guide", "url": "https://scikit-learn.org/stable/user_guide.html"}],
+              "courses": [], "project": "Build a Titanic survival classifier on Kaggle. Aim for top 50%."},
+            {"title": "Feature engineering, cross-validation, model evaluation", "objective": "What separates good ML engineers from people who just call .fit().", "hours": 8,
+              "reading": [{"name": "Kaggle Learn — Feature Engineering (free)", "url": "https://www.kaggle.com/learn/feature-engineering"}],
+              "courses": [], "project": "Improve your Titanic score. Document every change and what it did to accuracy."}
+          ]
+        },
+        {
+          "title": "Unsupervised learning",
+          "lessons": [
+            {"title": "Clustering, dimensionality reduction, anomaly detection", "objective": "Find patterns without labels.", "hours": 8,
+              "reading": [],
+              "courses": [], "project": "Cluster 10,000 customer records into 5 groups. Describe each segment."}
+          ],
+          "earning_milestone": "MILESTONE: At this point you can apply for ML internships (₹50k–1.5L/mo in India, $3k–8k/mo internationally), freelance ML work on Upwork ($25–60/hr), or compete for Kaggle prize money. Polish your portfolio NOW."
+        }
+      ]
+    },
+    {
+      "id": "phase-12",
+      "title": "Phase 12 — Deep Learning, LLMs & Generative AI",
+      "color": "#8b5cf6",
+      "icon": "🧠",
+      "duration_weeks": "12–16",
+      "objective": "The architectures behind ChatGPT, Claude, Stable Diffusion, and every AI product. The most leveraged skillset on Earth in 2026.",
+      "outcome": "You've built a neural network from scratch and a working RAG/agent app on top of LLMs.",
+      "modules": [
+        {
+          "title": "Neural networks fundamentals",
+          "lessons": [
+            {"title": "Perceptrons, activations, backpropagation", "objective": "Build a neural net from scratch. Pure NumPy. No frameworks. This will change how you see AI forever.", "hours": 14,
+              "reading": [{"name": "Andrej Karpathy — Neural Networks: Zero to Hero (free, the gold standard)", "url": "https://www.youtube.com/playlist?list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ"}, {"name": "Neural Networks and Deep Learning (Michael Nielsen, free book)", "url": "http://neuralnetworksanddeeplearning.com/"}],
+              "courses": [
+                {"platform": "Coursera", "title": "Deep Learning Specialization (Andrew Ng)", "url": "https://www.coursera.org/specializations/deep-learning", "highly_recommended": true}],
+              "project": "Implement Karpathy's micrograd. Train a tiny neural net on MNIST."},
+            {"title": "PyTorch — the dominant deep learning framework", "objective": "PyTorch has won. Industry, research, OpenAI, Anthropic — everyone uses it.", "hours": 12,
+              "reading": [{"name": "PyTorch official tutorials", "url": "https://pytorch.org/tutorials/"}],
+              "courses": [{"platform": "Udemy", "title": "PyTorch for Deep Learning Bootcamp (Daniel Bourke + Andrei Neagoie)", "url": "https://www.udemy.com/course/pytorch-for-deep-learning/", "highly_recommended": true}],
+              "project": "Reproduce your micrograd net in PyTorch. Train on FashionMNIST. Hit >88% accuracy."}
+          ]
+        },
+        {
+          "title": "Specialized architectures",
+          "lessons": [
+            {"title": "CNNs — how AI sees", "objective": "Behind every image classifier, face recognition, self-driving system.", "hours": 10,
+              "reading": [],
+              "courses": [], "project": "Train a CNN to classify 10 types of food images. >75% test accuracy."},
+            {"title": "Transformers & attention — the architecture behind ChatGPT/Claude", "objective": "The single most important paper of the 2010s. Understand it deeply.", "hours": 14,
+              "reading": [{"name": "Andrej Karpathy — Let's build GPT (legendary 2-hour video)", "url": "https://www.youtube.com/watch?v=kCc8FmEb1nY"}, {"name": "The Illustrated Transformer (Jay Alammar)", "url": "https://jalammar.github.io/illustrated-transformer/"}],
+              "courses": [
+                {"platform": "Coursera", "title": "Generative AI with LLMs (DeepLearning.AI + AWS)", "url": "https://www.coursera.org/learn/generative-ai-with-llms", "highly_recommended": true}],
+              "project": "Following Karpathy's video, code a GPT from scratch. Train it on tinyshakespeare."}
+          ]
+        },
+        {
+          "title": "Applied AI — building on top of LLMs",
+          "lessons": [
+            {"title": "OpenAI / Anthropic / Hugging Face APIs", "objective": "Building products on top of frontier LLMs. What most AI engineers do day-to-day in 2026.", "hours": 8,
+              "reading": [{"name": "Anthropic Claude API docs", "url": "https://docs.claude.com/"}, {"name": "OpenAI API docs", "url": "https://platform.openai.com/docs"}, {"name": "Hugging Face NLP Course (free, excellent)", "url": "https://huggingface.co/learn/nlp-course"}],
+              "courses": [{"platform": "DeepLearning.AI Short Courses (free)", "title": "All short courses — Prompt Engineering, LangChain, RAG", "url": "https://learn.deeplearning.ai/", "free_audit": true}],
+              "project": "Build a chatbot that answers questions about a PDF you upload (basic RAG)."},
+            {"title": "Prompt engineering, RAG, agents", "objective": "The applied AI engineer toolkit. These three skills get you hired.", "hours": 14,
+              "reading": [{"name": "Anthropic — prompt engineering guide", "url": "https://docs.claude.com/en/docs/build-with-claude/prompt-engineering/overview"}, {"name": "LangChain docs", "url": "https://python.langchain.com/docs/get_started/introduction"}],
+              "courses": [], "project": "Build an AI agent that takes a PDF resume + job description and writes a tailored cover letter. Deploy it."},
+            {"title": "Fine-tuning open-source models (Llama, Mistral, Qwen)", "objective": "Fine-tune your own LLM. Cheaper and more controllable than API calls.", "hours": 10,
+              "reading": [{"name": "Hugging Face PEFT/LoRA docs", "url": "https://huggingface.co/docs/peft"}],
+              "courses": [], "project": "Fine-tune a 7B model with LoRA on a domain you care about (sports stats, medicine, law, anime)."}
+          ],
+          "earning_milestone": "BIG MILESTONE: AI engineers with a real portfolio earn $40–120/hr on Upwork even before graduating university. Internships at AI startups: $5k–10k/month. Apply to: YC startups, DeepLearning.AI fellowships, Outlier.ai (AI training, $30–50/hr remote), Anthropic / OpenAI / Google residencies."
+        }
+      ]
+    },
+    {
+      "id": "phase-13",
+      "title": "Phase 13 — Career Launch & Side Income",
+      "color": "#22c55e",
+      "icon": "💰",
+      "duration_weeks": "Ongoing",
+      "objective": "Turn skills into income, reputation, and a real career.",
+      "outcome": "Public portfolio, paid work, and ideally a launched product.",
+      "modules": [
+        {
+          "title": "Build a reputation",
+          "lessons": [
+            {"title": "Portfolio of 5 great projects", "objective": "Quality > quantity. 5 polished, deployed projects with great READMEs beat 30 half-finished tutorials.", "hours": 0,
+              "reading": [],
+              "courses": [], "project": "Pick your best 5 projects. Rewrite the READMEs. Add screenshots, demo links, architecture diagrams. Pin them on GitHub."},
+            {"title": "Public learning: Twitter/X, LinkedIn, blog", "objective": "Recruiters Google your name. Make sure they find something. Public learning compounds insanely.", "hours": 0,
+              "reading": [{"name": "Build in Public guide", "url": "https://arvidkahl.com/"}],
+              "courses": [], "project": "Write 1 short technical post per month. Topics: 'How I built X', 'How Y works under the hood'. Post on Twitter, LinkedIn, dev.to, your own blog."}
+          ]
+        },
+        {
+          "title": "Earn",
+          "lessons": [
+            {"title": "Freelancing: Upwork, Fiverr, Toptal", "objective": "Trade hours for cash, build a track record, get testimonials.", "hours": 0,
+              "reading": [],
+              "courses": [], "project": "Open Upwork + Fiverr + LinkedIn profiles. Apply to 10 jobs per week, every week."},
+            {"title": "Internships, residencies, full-time roles", "objective": "The career-defining moves.", "hours": 0,
+              "reading": [{"name": "Anthropic Careers", "url": "https://www.anthropic.com/jobs"}, {"name": "Google AI Residency", "url": "https://research.google/programs-and-events/ai-residency/"}, {"name": "YC Work at a Startup", "url": "https://www.workatastartup.com/"}],
+              "courses": [], "project": "Apply to 5 internships every cycle. FAANG, top startups, AI labs. Worst case: feedback."},
+            {"title": "Build a product (the long game)", "objective": "One indie product earning $1k/month at age 21 changes your entire trajectory.", "hours": 0,
+              "reading": [{"name": "The Mom Test (book — talk to users)", "url": "https://www.momtestbook.com/"}, {"name": "Indie Hackers", "url": "https://www.indiehackers.com/"}],
+              "courses": [], "project": "Find ONE problem you have. Build a tiny tool that solves it. Post on Product Hunt and Reddit. Talk to your first users."}
+          ]
+        }
+      ]
+    }
+  ]
+}

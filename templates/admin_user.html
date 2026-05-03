@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+{% block title %}{{ viewed_user.username }} · Admin{% endblock %}
+{% block content %}
+<a href="{{ url_for('admin_dashboard') }}" class="lesson-back">&larr; Back to admin</a>
+<h1>{{ viewed_user.username }}</h1>
+<p class="muted">{{ viewed_user.email }} &middot; joined {{ viewed_user.created_at[:10] }}</p>
+
+<div class="stats-grid">
+  <div class="stat">
+    <div class="num">{{ pct }}%</div>
+    <div class="lbl">Approved progress</div>
+  </div>
+  <div class="stat">
+    <div class="num">{{ done }} / {{ total }}</div>
+    <div class="lbl">Lessons approved</div>
+  </div>
+  <div class="stat">
+    <div class="num">{{ pending_count }}</div>
+    <div class="lbl">Pending review</div>
+  </div>
+  <div class="stat">
+    <div class="num">{{ rejected_count }}</div>
+    <div class="lbl">Rejected</div>
+  </div>
+</div>
+
+<h2>Trust signals</h2>
+<div class="card">
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px;">
+    <div>
+      <div class="muted" style="font-size:12px;text-transform:uppercase;letter-spacing:0.06em;">Time-on-page ratio</div>
+      <div style="font-size:22px;font-weight:700;
+        color: {% if trust_ratio is none %}var(--text-muted){% elif trust_ratio >= 80 %}#4ade80{% elif trust_ratio >= 50 %}#facc15{% else %}#fca5a5{% endif %};">
+        {% if trust_ratio is none %}—{% else %}{{ trust_ratio }}%{% endif %}
+      </div>
+      <div class="muted" style="font-size:12px;">actual time spent ÷ minimum required, averaged across submissions</div>
+    </div>
+    <div>
+      <div class="muted" style="font-size:12px;text-transform:uppercase;letter-spacing:0.06em;">Lessons in last 24h</div>
+      <div style="font-size:22px;font-weight:700;
+        color: {% if burst_24h > 5 %}#fca5a5{% elif burst_24h > 2 %}#facc15{% else %}var(--text){% endif %};">
+        {{ burst_24h }}
+      </div>
+      <div class="muted" style="font-size:12px;">{% if burst_24h > 5 %}⚠ Burst — verify these in person.{% else %}Healthy pace.{% endif %}</div>
+    </div>
+    <div>
+      <div class="muted" style="font-size:12px;text-transform:uppercase;letter-spacing:0.06em;">Under-time submissions</div>
+      <div style="font-size:22px;font-weight:700;color:{% if fast_completions > 0 %}#fca5a5{% else %}var(--text){% endif %};">{{ fast_completions }}</div>
+      <div class="muted" style="font-size:12px;">submissions made faster than minimum required time (should be 0)</div>
+    </div>
+  </div>
+</div>
+
+<h2>Phase progress</h2>
+<div class="phase-grid">
+  {% for phase in phases %}
+    {% set s = stats[phase.id] %}
+    <div class="phase-card">
+      <div class="phase-head">
+        <div class="phase-title">{{ phase.title }}</div>
+        <div class="phase-meta">{{ s.done }}/{{ s.total }} approved</div>
+      </div>
+      <div class="phase-stats" style="margin-top:10px;">
+        <div class="progress"><div class="progress-fill" style="width: {{ s.pct }}%;"></div></div>
+        <span class="muted" style="font-size:12px;width:42px;text-align:right;">{{ s.pct }}%</span>
+      </div>
+    </div>
+  {% endfor %}
+</div>
+
+<h2>Submission history</h2>
+{% if completed_rows|length == 0 %}
+  <p class="muted">No submissions yet.</p>
+{% else %}
+  {% for r in completed_rows %}
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px;">
+        <strong>{{ r.lesson_title }}</strong>
+        <div>
+          {% if r.status == 'approved' %}<span class="tag success">✓ Approved</span>
+          {% elif r.status == 'pending-review' %}<span class="tag warn">⏳ Pending</span>
+          {% elif r.status == 'rejected' %}<span class="tag" style="background:rgba(239,68,68,0.12);color:#fca5a5;border-color:rgba(239,68,68,0.25);">✗ Rejected</span>
+          {% endif %}
+          <span class="muted" style="font-size:12px;margin-left:6px;">{{ r.completed_at }}</span>
+        </div>
+      </div>
+      <div class="muted" style="font-size:12px;margin-top:6px;">
+        Spent {{ (r.actual_seconds // 60) }}m of {{ (r.expected_min_seconds // 60) }}m minimum
+        ({% if r.expected_min_seconds %}{{ (r.actual_seconds / r.expected_min_seconds * 100)|round|int }}%{% else %}—{% endif %})
+      </div>
+      {% if r.reflection %}
+        <p style="font-size:13px;margin-top:10px;white-space:pre-wrap;">{{ r.reflection }}</p>
+      {% endif %}
+      {% if r.submission_url %}
+        <p style="font-size:13px;margin-top:6px;"><a href="{{ r.submission_url }}" target="_blank" rel="noopener">{{ r.submission_url }}</a>
+          {% if r.submission_notes %} &mdash; <span class="muted">{{ r.submission_notes }}</span>{% endif %}
+        </p>
+      {% endif %}
+      {% if r.status == 'pending-review' %}
+        <form method="POST" action="{{ url_for('admin_review_decision', user_id=viewed_user.id, lesson_key=r.lesson_key) }}" style="margin-top:10px;">
+          <input type="text" name="reviewer_notes" placeholder="Reviewer notes (optional)">
+          <button type="submit" name="decision" value="approve" class="btn-success" style="font-size:12px;padding:6px 12px;">✓ Approve</button>
+          <button type="submit" name="decision" value="reject" class="btn-danger" style="font-size:12px;padding:6px 12px;margin-left:6px;">✗ Reject</button>
+        </form>
+      {% elif r.reviewer_notes %}
+        <p class="muted" style="font-size:12px;margin-top:6px;"><em>Reviewer notes: {{ r.reviewer_notes }}</em></p>
+      {% endif %}
+    </div>
+  {% endfor %}
+{% endif %}
+{% endblock %}

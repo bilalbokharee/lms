@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Sign in · Future-Proof Engineer{% endblock %}
+{% block content %}
+<div class="auth-wrap">
+  <h1>Welcome back</h1>
+  <p class="muted" style="margin-top:0;">Pick up where you left off.</p>
+  <form method="POST" style="margin-top:20px;">
+    <label for="username">Username or email</label>
+    <input type="text" id="username" name="username" required autocomplete="username">
+
+    <label for="password">Password</label>
+    <input type="password" id="password" name="password" required autocomplete="current-password">
+
+    <button type="submit" style="width:100%;margin-top:6px;">Sign in</button>
+  </form>
+  <p class="muted" style="text-align:center;margin-top:18px;font-size:13px;">
+    New here? <a href="{{ url_for('signup') }}">Create an account</a>
+  </p>
+</div>
+{% endblock %}

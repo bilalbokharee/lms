@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}{{ phase.title }} · From Bilal{% endblock %}
+{% block content %}
+<a href="{{ url_for('dashboard') }}" class="lesson-back">← Back to dashboard</a>
+<div class="phase-banner" style="--phase-color: {{ phase.color or '#8b5cf6' }};">
+  <div style="display:flex;align-items:center;gap:14px;margin-bottom:10px;">
+    <span style="font-size:38px;filter: drop-shadow(0 0 18px {{ phase.color or '#8b5cf6' }});">{{ phase.icon or '📘' }}</span>
+    <h1 style="margin:0;">{{ phase.title }}</h1>
+  </div>
+  <p class="muted" style="font-size:14px;"><strong>Duration:</strong> {{ phase.duration_weeks }} weeks</p>
+  <p style="margin-top:6px;"><strong>Goal:</strong> {{ phase.objective }}</p>
+  <p style="margin-top:6px;"><strong>You'll be able to:</strong> {{ phase.outcome }}</p>
+</div>
+
+{% for module in phase.modules %}
+  {% set m_idx = loop.index0 %}
+  <div class="module-block">
+    <div class="module-title">{{ loop.index }}. {{ module.title }}</div>
+    {% for lesson in module.lessons %}
+      {% set key = lesson_key_fn(phase.id, m_idx, loop.index0) %}
+      {% set status = status_map.get(key) %}
+      <div class="lesson-row">
+        {% if status == 'approved' %}
+          <span class="check done" title="Approved">✓</span>
+        {% elif status == 'pending-review' %}
+          <span class="check" style="background:rgba(245,158,11,0.18);border-color:#fcd34d;color:#fcd34d;" title="Pending review">⏳</span>
+        {% elif status == 'rejected' %}
+          <span class="check" style="background:rgba(239,68,68,0.18);border-color:#ef4444;color:#ef4444;" title="Rejected — resubmit">✗</span>
+        {% else %}
+          <span class="check"></span>
+        {% endif %}
+        <a href="{{ url_for('lesson_view', phase_id=phase.id, m_idx=m_idx, l_idx=loop.index0) }}">{{ lesson.title }}</a>
+        <span class="lesson-hours">~{{ lesson.hours }}h</span>
+      </div>
+    {% endfor %}
+    {% if module.earning_milestone %}
+      <div class="earning-block">💰 {{ module.earning_milestone }}</div>
+    {% endif %}
+  </div>
+{% endfor %}
+
+{% if phase.earning_milestone %}
+  <div class="earning-block" style="margin-top:30px;">💰 {{ phase.earning_milestone }}</div>
+{% endif %}
+{% endblock %}

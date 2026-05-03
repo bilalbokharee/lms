@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block title %}Admin · Future-Proof Engineer{% endblock %}
+{% block content %}
+<h1>Admin Dashboard</h1>
+<p class="muted">Track every learner's progress through the roadmap.</p>
+
+{% if pending_total > 0 %}
+  <div class="card" style="background:rgba(234,179,8,0.07);border-color:rgba(234,179,8,0.25);">
+    <strong>📋 {{ pending_total }} submission{{ '' if pending_total == 1 else 's' }} waiting for your review.</strong>
+    <a href="{{ url_for('admin_review_queue') }}" style="margin-left:10px;">Open review queue →</a>
+  </div>
+{% endif %}
+
+<div class="card" style="padding:0;overflow:hidden;">
+  <table>
+    <thead>
+      <tr>
+        <th>User</th>
+        <th>Email</th>
+        <th>Approved progress</th>
+        <th>Lessons</th>
+        <th>Pending</th>
+        <th>Joined</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for u in users %}
+      <tr>
+        <td>
+          <a href="{{ url_for('admin_user_detail', user_id=u.id) }}"><strong>{{ u.username }}</strong></a>
+          {% if u.is_superuser %}<span class="tag accent" style="margin-left:6px;">SU</span>{% endif %}
+        </td>
+        <td class="muted">{{ u.email }}</td>
+        <td style="min-width:180px;">
+          <div class="progress" style="margin-bottom:4px;"><div class="progress-fill" style="width: {{ u.pct }}%;"></div></div>
+          <span class="muted" style="font-size:12px;">{{ u.pct }}%</span>
+        </td>
+        <td>{{ u.done }} / {{ u.total }}</td>
+        <td>
+          {% if u.pending > 0 %}<span class="tag warn">{{ u.pending }}</span>{% else %}<span class="muted">—</span>{% endif %}
+        </td>
+        <td class="muted" style="font-size:13px;">{{ u.created_at[:10] }}</td>
+        <td>
+          {% if not u.is_superuser %}
+          <form method="POST" action="{{ url_for('admin_user_delete', user_id=u.id) }}" onsubmit="return confirm('Delete {{ u.username }}? This cannot be undone.');" style="display:inline;">
+            <button type="submit" class="btn-danger" style="font-size:12px;padding:5px 10px;">Delete</button>
+          </form>
+          {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}
